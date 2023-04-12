@@ -1,6 +1,6 @@
-import type { Lyric } from '.';
+import type { LyricSentence } from '.';
 
-export const sunflowerLyrics: Lyric[] = [
+export const sunflowerLyrics: LyricSentence[] = [
   {
     id: 1,
     text: 'Ayy, ayy, ayy, ayy (ooh)',
@@ -89,12 +89,12 @@ export const sunflowerLyrics: Lyric[] = [
   {
     id: 18,
     text: "losin' your grip",
-    time: 50.5,
+    time: 50.1,
   },
   {
     id: 19,
     text: "Screamin' at my face, baby, don't trip",
-    time: 51.8,
+    time: 51.6,
   },
   {
     id: 20,

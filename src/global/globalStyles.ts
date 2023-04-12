@@ -13,6 +13,10 @@ const globalStyles = globalCss({
     fontSize: '1rem',
     color: '#fff',
   },
+  '.no-select': {
+    userSelect: 'none',
+    '-webkit-user-select': 'none',
+  },
 });
 
 export { globalStyles };

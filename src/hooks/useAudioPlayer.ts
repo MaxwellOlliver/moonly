@@ -1,7 +1,23 @@
-import { useCallback, useEffect } from 'react';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-export default function useAudioPlayer(ref: React.RefObject<HTMLAudioElement>) {
+interface IUseAudioPlayer {
+  data: {
+    volume: number;
+    currentTime: number;
+    duration: number;
+    isPaused: boolean;
+    readyToPlay: boolean;
+  };
+  pause: () => void;
+  play: () => void;
+  togglePlayPause: () => void;
+  setVolume: (v: number) => void;
+  setCurrentTime: (t: number, add?: boolean) => void;
+}
+
+export default function useAudioPlayer(
+  ref: React.RefObject<HTMLAudioElement>,
+): IUseAudioPlayer {
   const [data, setData] = useState({
     volume: 0.3,
     currentTime: 0,
@@ -32,7 +48,26 @@ export default function useAudioPlayer(ref: React.RefObject<HTMLAudioElement>) {
     [ref],
   );
 
-  function setVolume(volume: number) {
+  const togglePlayPause = useCallback(
+    function togglePlayPause() {
+      if (data.isPaused) {
+        setData((state) => ({
+          ...state,
+          isPaused: false,
+        }));
+        ref.current?.play();
+      } else {
+        setData((state) => ({
+          ...state,
+          isPaused: true,
+        }));
+        ref.current?.pause();
+      }
+    },
+    [ref, data],
+  );
+
+  function setVolume(volume: number): void {
     setData((state) => ({
       ...state,
       volume,
@@ -41,13 +76,16 @@ export default function useAudioPlayer(ref: React.RefObject<HTMLAudioElement>) {
       ref.current.volume = volume;
     }
   }
-  function setCurrentTime(time: number) {
-    setData((state) => ({
-      ...state,
-      currentTime: time,
-    }));
+
+  function setCurrentTime(time: number, add?: boolean): void {
     if (ref.current) {
-      ref.current.currentTime = time;
+      pause();
+      if (add) {
+        ref.current.currentTime = ref.current.currentTime + time;
+      } else {
+        ref.current.currentTime = time;
+      }
+      play();
     }
   }
 
@@ -82,5 +120,6 @@ export default function useAudioPlayer(ref: React.RefObject<HTMLAudioElement>) {
     play,
     setVolume,
     setCurrentTime,
+    togglePlayPause,
   };
 }

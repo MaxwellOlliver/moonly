@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, Fragment } from 'react';
 import {
   BsPauseCircleFill,
   BsVolumeUp,
   BsPlayCircleFill,
 } from 'react-icons/bs';
 
-import RangeInput from '../../components/Slider';
+import RangeInput from '../../components/RangeInput';
 import { PlayerContainer } from './styles';
 import useAudioPlayer from '../../hooks/useAudioPlayer';
 import { formatSeconds } from '../../utils/formatSeconds';
@@ -14,12 +14,35 @@ import Sunflower from '../../assets/sunflower.mp3';
 import AlbumCover from '../../assets/sunflower-cover.jpg';
 import Check from '../../assets/check.png';
 import LyricsPanel from './LyricsPanel';
+import { isMobile } from 'react-device-detect';
+import useShortcut from '../../hooks/useShortcut';
 
 export default function Panel(): JSX.Element {
   const [volumeInput, setVolumeInput] = useState(30);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { data, pause, play, setVolume, setCurrentTime } =
+  const { data, pause, play, setVolume, setCurrentTime, togglePlayPause } =
     useAudioPlayer(audioRef);
+
+  useShortcut([
+    {
+      key: 'ArrowLeft',
+      onTrigger: () => {
+        setCurrentTime(-5, true);
+      },
+    },
+    {
+      key: 'ArrowRight',
+      onTrigger: () => {
+        setCurrentTime(5, true);
+      },
+    },
+    {
+      key: 'Space',
+      onTrigger: () => {
+        togglePlayPause();
+      },
+    },
+  ]);
 
   function handleChangeVolumeInput(value: number): void {
     setVolumeInput(value);
@@ -31,39 +54,51 @@ export default function Panel(): JSX.Element {
   }
 
   return (
-    <>
+    <Fragment>
       <LyricsPanel time={data.currentTime} />
-      <footer>
-        <div className="song-info">
+      <PlayerContainer>
+        <div className="player__song-info">
           <img className="song-info__album-cover" src={AlbumCover} />
           <div className="song-info__box">
-            <h4>Sunflower (feat. Swae Lee)</h4>
+            <h4>Sunflower</h4>
             <div className="box__artist">
-              <span>Post Malone</span>
+              <span>Post Malone, Swae Lee</span>
               <img src={Check} alt="" />
             </div>
           </div>
         </div>
-        <PlayerContainer>
+        <div className="player__audio-control">
           <audio ref={audioRef} src={Sunflower} loop />
           <div className="player__controls">
             {data.isPaused ? (
-              <BsPlayCircleFill color="#fff" size={60} onClick={play} />
+              <BsPlayCircleFill
+                className="controls__play-pause"
+                color="#fff"
+                size={60}
+                onClick={play}
+              />
             ) : (
-              <BsPauseCircleFill color="#fff" size={60} onClick={pause} />
+              <BsPauseCircleFill
+                className="controls__play-pause"
+                color="#fff"
+                size={60}
+                onClick={pause}
+              />
             )}
-            <div className="controls__volume">
-              <BsVolumeUp color="#fff" size={35} />
-              <div className="volume__range-wrapper">
-                <div className="range-wrapper__input">
-                  <RangeInput
-                    step={1}
-                    value={volumeInput}
-                    onChange={handleChangeVolumeInput}
-                  />
+            {!isMobile && (
+              <div className="controls__volume">
+                <BsVolumeUp color="#fff" size={35} />
+                <div className="volume__range-wrapper">
+                  <div className="range-wrapper__input">
+                    <RangeInput
+                      step={1}
+                      value={volumeInput}
+                      onChange={handleChangeVolumeInput}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
           <span className="player__time">
             {formatSeconds(data.currentTime)}
@@ -73,9 +108,10 @@ export default function Panel(): JSX.Element {
               ((data.currentTime * 100) / data.duration).toFixed(1),
             )}
             onChange={handleChangeTime}
+            step={0.1}
           />
-        </PlayerContainer>
-      </footer>
-    </>
+        </div>
+      </PlayerContainer>
+    </Fragment>
   );
 }

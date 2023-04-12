@@ -1,26 +1,27 @@
 import { useRef } from 'react';
-import { type Lyric } from '../../mock/lyrics';
-import { sunflowerLyrics } from '../../mock/lyrics/sunflower';
+import { type LyricSentence, sunflower } from '../../lyrics';
 import { LyricsPanelContainer } from './styles';
 
 interface LyricsPanelProps {
   time: number;
 }
 
-interface LyricsWithFocus extends Lyric {
+interface LyricsWithFocus extends LyricSentence {
   focus: 'none' | 'semi' | 'total';
 }
 
 export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
-  const lastCurrent = useRef<Lyric | null>(null);
+  const lastCurrent = useRef<LyricSentence | null>(null);
   const scrollRef = useRef<HTMLUListElement>(null);
 
   function getLyrics(): LyricsWithFocus[] {
-    const current: Lyric | undefined = sunflowerLyrics.find((lyric, index) => {
-      const next = sunflowerLyrics[index + 1];
+    const current: LyricSentence | undefined = sunflower.find(
+      (lyric, index) => {
+        const next = sunflower[index + 1];
 
-      return lyric.time <= time && ((next && next.time > time) || !next);
-    });
+        return lyric.time <= time && ((next && next.time > time) || !next);
+      },
+    );
 
     if (!current && !lastCurrent.current) {
       scrollRef.current?.scrollTo({
@@ -42,8 +43,6 @@ export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
         `[data-lyrics-id="lyric-${current.id}"]`,
       );
 
-      console.log(lyricElement);
-
       if (lyricElement) {
         lyricElement.scrollIntoView({
           behavior: 'smooth',
@@ -54,13 +53,11 @@ export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
 
     lastCurrent.current = current ?? null;
 
-    return sunflowerLyrics.map((lyric, index) => {
+    return sunflower.map((lyric, index) => {
       const previous = current
-        ? sunflowerLyrics[sunflowerLyrics.indexOf(current) - 1]
+        ? sunflower[sunflower.indexOf(current) - 1]
         : null;
-      const next = current
-        ? sunflowerLyrics[sunflowerLyrics.indexOf(current) + 1]
-        : null;
+      const next = current ? sunflower[sunflower.indexOf(current) + 1] : null;
 
       return {
         ...lyric,
