@@ -65,7 +65,7 @@ const PlayerContainer = styled('div', {
   '@bp4': {
     gap: '10rem',
   },
-  '.song-info': {
+  '.player__song-info': {
     display: 'flex',
     gap: '2rem',
     minWidth: 'max-content',
@@ -76,7 +76,6 @@ const PlayerContainer = styled('div', {
     '.song-info__album-cover': {
       width: '100%',
       maxWidth: '190px',
-      // height: '190px',
       objectFit: 'cover',
       borderRadius: '15px',
       '@bp1': {

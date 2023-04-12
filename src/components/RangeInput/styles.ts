@@ -8,7 +8,7 @@ const RangeContainer = styled('div', {
   cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
-  '&[data-mouse-down="true"], &[data-is-mobile]': {
+  '&[data-mouse-down="true"], &[data-is-mobile="true"]': {
     '.range__thumb': {
       transform: 'scale(1)',
     },
@@ -61,6 +61,7 @@ const RangeThumb = styled('div', {
   transition: 'transform 0.3s, box-shadow 0.3s',
   pointerEvents: 'none',
   cursor: 'pointer',
+  '&:hover': {},
 });
 
 export { RangeContainer, RangeSlider, RangeValue, RangeThumb };
