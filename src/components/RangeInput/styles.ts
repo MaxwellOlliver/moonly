@@ -5,7 +5,7 @@ const RangeContainer = styled('div', {
   width: '100%',
   height: '3px',
   padding: '6px 0',
-  cursor: 'pointer',
+  cursor: 'default',
   display: 'flex',
   alignItems: 'center',
   '&[data-mouse-down="true"], &[data-is-mobile="true"]': {
@@ -15,7 +15,6 @@ const RangeContainer = styled('div', {
   },
   '&:hover': {
     '.range__thumb': {
-      boxShadow: '0 0 0px 5px #ffffff26',
       transform: 'scale(1)',
     },
   },
@@ -33,7 +32,7 @@ const RangeSlider = styled('span', {
   minHeight: '5px',
   backgroundColor: '#ffffff10',
   borderRadius: '5px',
-  cursor: 'pointer',
+  cursor: 'default',
   display: 'flex',
 });
 
@@ -59,9 +58,11 @@ const RangeThumb = styled('div', {
   zIndex: 3,
   transform: 'scale(0)',
   transition: 'transform 0.3s, box-shadow 0.3s',
-  pointerEvents: 'none',
-  cursor: 'pointer',
-  '&:hover': {},
+  // pointerEvents: 'none',
+  cursor: 'default',
+  '&:hover': {
+    boxShadow: '0 0 0px 5px #ffffff26',
+  },
 });
 
 export { RangeContainer, RangeSlider, RangeValue, RangeThumb };

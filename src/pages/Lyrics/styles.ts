@@ -184,10 +184,10 @@ const PlayerContainer = styled('div', {
         width: 'min-content',
         '&:hover': {
           '.volume__range-wrapper': {
-            minWidth: '100px',
+            minWidth: '90px',
             opacity: 1,
             '@bp1': {
-              minWidth: '80px',
+              minWidth: '90px',
             },
           },
         },
@@ -198,7 +198,7 @@ const PlayerContainer = styled('div', {
           overflow: 'hidden',
           opacity: 0,
           '.range-wrapper__input': {
-            padding: '8px',
+            padding: '18px',
           },
         },
         svg: {
@@ -257,17 +257,17 @@ const LyricsPanelContainer = styled('div', {
       alignItems: 'center',
       justifyContent: 'center',
       fontSize: '2.5rem',
-      color: '#ffffff80',
-      transition: 'color 0.3s',
+      color: '#fff',
+      transition: 'opacity 0.3s',
       textAlign: 'center',
       '&.--focus-total': {
-        color: '#fff',
+        opacity: 1,
       },
       '&.--focus-semi': {
-        color: '#ffffff80',
+        opacity: 0.5,
       },
       '&.--focus-none': {
-        color: '#ffffff33',
+        opacity: 0.2,
       },
       '@bp1': {
         fontSize: '1.5rem',
@@ -277,6 +277,26 @@ const LyricsPanelContainer = styled('div', {
       },
       '@bp5': {
         fontSize: '2.5rem',
+      },
+      '.lyric__catenation': {
+        backgroundColor: '#4175C5',
+        borderRadius: '3px',
+        color: '#fff',
+      },
+      '.lyric__intrusion': {
+        backgroundColor: '#AE6816',
+        borderRadius: '3px',
+        color: '#fff',
+      },
+      '.lyric__elision': {
+        backgroundColor: '#41C58D',
+        borderRadius: '3px',
+        color: '#fff',
+      },
+      '.lyric__assimilation': {
+        backgroundColor: '#8341C5',
+        borderRadius: '3px',
+        color: '#fff',
       },
     },
   },

@@ -80,8 +80,9 @@ export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
             key={lyric.id}
             data-lyrics-id={`lyric-${lyric.id}`}
             className={`scroll-list__lyric --focus-${lyric.focus}`}
-            dangerouslySetInnerHTML={{ __html: lyric.text }}
-          ></li>
+          >
+            <span dangerouslySetInnerHTML={{ __html: lyric.text }} />
+          </li>
         ))}
       </ul>
     </LyricsPanelContainer>
