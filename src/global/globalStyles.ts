@@ -13,9 +13,6 @@ const globalStyles = globalCss({
     fontSize: '1rem',
     color: '#fff',
   },
-  body: {
-    height: '-webkit-fill-available',
-  },
   '.no-select': {
     userSelect: 'none',
     '-webkit-user-select': 'none',
