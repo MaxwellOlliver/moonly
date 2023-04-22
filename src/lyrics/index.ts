@@ -1,4 +1,5 @@
 import { sunflowerLyrics } from './sunflower';
+import { sunflowerLyrics as sEwj } from './sunflowerEwj';
 
 export interface LyricSentence {
   id: number;
@@ -6,4 +7,4 @@ export interface LyricSentence {
   time: number;
 }
 
-export { sunflowerLyrics as sunflower };
+export { sEwj as sunflower };

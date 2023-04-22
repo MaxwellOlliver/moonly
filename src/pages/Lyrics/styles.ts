@@ -8,6 +8,27 @@ const Container = styled('div', {
   minHeight: '100vh',
   display: 'grid',
   gridTemplateColumns: '1fr',
+  '.lyrics__help-btn': {
+    display: 'flex',
+    alignItems: 'center',
+    color: '#fff',
+    background: 'none',
+    fontSize: '1rem',
+    cursor: 'pointer',
+    position: 'fixed',
+    gap: '5px',
+    '@bp1': {
+      top: '1rem',
+      left: '1rem',
+    },
+    '@bp3': {
+      top: '2rem',
+      left: '2rem',
+    },
+    svg: {
+      fontSize: '1.2rem',
+    },
+  },
   '@bp1': {
     gridTemplateRows: '70vh 30vh',
   },
@@ -302,9 +323,118 @@ const LyricsPanelContainer = styled('div', {
   },
 });
 
+const HelpContainer = styled('div', {
+  width: '100%',
+  height: '100vh',
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  pointerEvents: 'none',
+  zindex: 999,
+
+  '&.--show': {
+    '.modal__overlay': {
+      opacity: 1,
+      pointerEvents: 'all',
+    },
+    '.modal__card': {
+      opacity: 1,
+      pointerEvents: 'all',
+    },
+  },
+
+  '.modal__overlay': {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#00000077',
+    backdropFilter: 'blur(3px)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: -1,
+    opacity: 0,
+    pointerEvents: 'none',
+    transition: 'opacity 0.3s',
+  },
+  '.modal__card': {
+    padding: '2rem',
+    position: 'absolute',
+    backgroundColor: '#ffffff22',
+    backdropFilter: 'blur(5px)',
+    borderRadius: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0,
+    pointerEvents: 'none',
+    transition: 'opacity 0.3s',
+    margin: '2rem',
+
+    '.card__header': {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      marginBottom: '2rem',
+      svg: {
+        fontSize: '2rem',
+      },
+    },
+
+    '.card__body': {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+
+      '.connected-speech': {
+        display: 'flex',
+        flexWrap: 'wrap',
+        listStyle: 'none',
+        marginBottom: '2rem',
+
+        '.connected-speech__type': {
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          width: '50%',
+          minWidth: 'max-content',
+          marginBottom: '1rem',
+          '@bp1': {
+            width: '100%',
+          },
+          '@bp2': {
+            width: '50%',
+          },
+          '.type__color': {
+            width: '50px',
+            height: '40px',
+            borderRadius: '5px',
+          },
+        },
+      },
+      '.body__play-btn': {
+        display: 'flex',
+        alignItems: 'center',
+        color: '#fff',
+        background: 'none',
+        fontSize: '1rem',
+        cursor: 'pointer',
+        svg: {
+          fontSize: '1.7rem',
+        },
+      },
+    },
+  },
+});
+
 export {
   Container,
   BackgroundContainer,
   PlayerContainer,
   LyricsPanelContainer,
+  HelpContainer,
 };

@@ -8,10 +8,13 @@ const globalStyles = globalCss({
     border: 'none',
     boxSizing: 'border-box',
   },
-  html: {
+  'html, body, button': {
     fontFamily: '"Poppins", Arial, Helvetica, sans-serif;',
     fontSize: '1rem',
     color: '#fff',
+  },
+  body: {
+    height: '-webkit-fill-available',
   },
   '.no-select': {
     userSelect: 'none',
