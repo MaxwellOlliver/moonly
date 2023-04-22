@@ -81,7 +81,7 @@ export default function Panel({ setReadyToPlay }: PanelProps): JSX.Element {
             ref={audioRef}
             src={Sunflower}
             loop
-            onCanPlay={() => {
+            onLoadedData={() => {
               setReadyToPlay((state) => ({ ...state, audio: true }));
             }}
           />

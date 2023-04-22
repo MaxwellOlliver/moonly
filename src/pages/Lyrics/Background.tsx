@@ -21,7 +21,7 @@ export default function Background({
         autoPlay
         loop
         muted
-        onCanPlay={() => {
+        onLoadedData={() => {
           setReadyToPlay((state) => ({ ...state, video: true }));
         }}
       />
