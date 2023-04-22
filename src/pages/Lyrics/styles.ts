@@ -68,7 +68,7 @@ const BackgroundContainer = styled('div', {
   maxHeight: '100vh',
   minHeight: '100vh',
   zIndex: -1,
-  video: {
+  img: {
     height: '100%',
     width: '100%',
     objectFit: 'cover',
