@@ -1,4 +1,4 @@
-import { useRef, useState, Fragment } from 'react';
+import { useRef, useState, Fragment, useEffect } from 'react';
 import {
   BsPauseCircleFill,
   BsVolumeUp,
@@ -18,12 +18,7 @@ import { isMobile } from 'react-device-detect';
 import useShortcut from '../../hooks/useShortcut';
 
 interface PanelProps {
-  setReadyToPlay: React.Dispatch<
-    React.SetStateAction<{
-      video: boolean;
-      audio: boolean;
-    }>
-  >;
+  setReadyToPlay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Panel({ setReadyToPlay }: PanelProps): JSX.Element {
@@ -31,6 +26,10 @@ export default function Panel({ setReadyToPlay }: PanelProps): JSX.Element {
   const audioRef = useRef<HTMLAudioElement>(null);
   const { data, pause, play, setVolume, setCurrentTime, togglePlayPause } =
     useAudioPlayer(audioRef);
+
+  useEffect(() => {
+    setReadyToPlay(data.readyToPlay);
+  }, [data.readyToPlay]);
 
   useShortcut([
     {
@@ -77,14 +76,7 @@ export default function Panel({ setReadyToPlay }: PanelProps): JSX.Element {
           </div>
         </div>
         <div className="player__audio-control">
-          <audio
-            ref={audioRef}
-            src={Sunflower}
-            loop
-            onLoadedData={() => {
-              setReadyToPlay((state) => ({ ...state, audio: true }));
-            }}
-          />
+          <audio ref={audioRef} src={Sunflower} data-a-id="audio-sn" loop />
           <div className="player__controls">
             {data.isPaused ? (
               <BsPlayCircleFill

@@ -9,10 +9,7 @@ import { classNames } from '../../utils/classNames';
 
 export default function Lyrics(): JSX.Element {
   const [isOpen, setIsOpen] = useState(true);
-  const [readyToPlay, setReadyToPlay] = useState({
-    video: false,
-    audio: false,
-  });
+  const [readyToPlay, setReadyToPlay] = useState(false);
 
   function toggle(): void {
     setIsOpen((state) => !state);
@@ -24,12 +21,12 @@ export default function Lyrics(): JSX.Element {
         <BiHelpCircle />
         <span>ajuda</span>
       </button>
-      <Background setReadyToPlay={setReadyToPlay} />
+      <Background />
       <Player setReadyToPlay={setReadyToPlay} />
       <Help toggleHelp={toggle} isOpen={isOpen} />
       <div
         className={classNames('lyrics__loader', {
-          '--hide': readyToPlay.audio && readyToPlay.video,
+          '--hide': readyToPlay,
         })}
       >
         <img src={Loader} alt="carregando" />

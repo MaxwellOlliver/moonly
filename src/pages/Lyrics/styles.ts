@@ -8,6 +8,7 @@ const Container = styled('div', {
   minHeight: '100vh',
   display: 'grid',
   gridTemplateColumns: '1fr',
+  background: '#000',
   '.lyrics__help-btn': {
     display: 'flex',
     alignItems: 'center',
