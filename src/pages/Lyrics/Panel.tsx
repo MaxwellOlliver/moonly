@@ -17,7 +17,16 @@ import LyricsPanel from './LyricsPanel';
 import { isMobile } from 'react-device-detect';
 import useShortcut from '../../hooks/useShortcut';
 
-export default function Panel(): JSX.Element {
+interface PanelProps {
+  setReadyToPlay: React.Dispatch<
+    React.SetStateAction<{
+      video: boolean;
+      audio: boolean;
+    }>
+  >;
+}
+
+export default function Panel({ setReadyToPlay }: PanelProps): JSX.Element {
   const [volumeInput, setVolumeInput] = useState(30);
   const audioRef = useRef<HTMLAudioElement>(null);
   const { data, pause, play, setVolume, setCurrentTime, togglePlayPause } =
@@ -68,7 +77,14 @@ export default function Panel(): JSX.Element {
           </div>
         </div>
         <div className="player__audio-control">
-          <audio ref={audioRef} src={Sunflower} loop />
+          <audio
+            ref={audioRef}
+            src={Sunflower}
+            loop
+            onCanPlay={() => {
+              setReadyToPlay((state) => ({ ...state, audio: true }));
+            }}
+          />
           <div className="player__controls">
             {data.isPaused ? (
               <BsPlayCircleFill

@@ -32,6 +32,31 @@ const Container = styled('div', {
   '@bp1': {
     gridTemplateRows: '70vh 30vh',
   },
+  '.lyrics__loader': {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    background: '#000',
+    width: '100vw',
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    gap: '1rem',
+    fontSize: '2rem',
+    fontWeight: '300',
+    opacity: 1,
+    pointerEvents: 'all',
+    transition: 'opacity 0.3s',
+    img: {
+      width: '30px',
+    },
+    '&.--hide': {
+      opacity: 0,
+      pointerEvents: 'none',
+    },
+  },
 });
 
 const BackgroundContainer = styled('div', {
