@@ -353,13 +353,13 @@ const HelpContainer = styled('div', {
   width: '100%',
   height: '100vh',
   position: 'fixed',
+  zIndex: 99999,
   top: 0,
   left: 0,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   pointerEvents: 'none',
-  zindex: 999,
 
   '&.--show': {
     '.modal__overlay': {
