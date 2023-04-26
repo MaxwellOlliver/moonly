@@ -18,17 +18,19 @@ import { isMobile } from 'react-device-detect';
 import useShortcut from '../../hooks/useShortcut';
 
 interface PanelProps {
-  setReadyToPlay: React.Dispatch<React.SetStateAction<boolean>>;
+  audioReady: () => void;
 }
 
-export default function Panel({ setReadyToPlay }: PanelProps): JSX.Element {
+export default function Panel({ audioReady }: PanelProps): JSX.Element {
   const [volumeInput, setVolumeInput] = useState(30);
   const audioRef = useRef<HTMLAudioElement>(null);
   const { data, pause, play, setVolume, setCurrentTime, togglePlayPause } =
     useAudioPlayer(audioRef);
 
   useEffect(() => {
-    setReadyToPlay(data.readyToPlay);
+    if (data.readyToPlay) {
+      audioReady();
+    }
   }, [data.readyToPlay]);
 
   useShortcut([

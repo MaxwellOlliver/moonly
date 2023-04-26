@@ -48,12 +48,13 @@ const Container = styled('div', {
     fontWeight: '300',
     opacity: 1,
     pointerEvents: 'all',
-    transition: 'opacity 0.3s',
+    transition: 'top 0.6s ease-in-out',
+    zIndex: 999999,
     img: {
       width: '30px',
     },
     '&.--hide': {
-      opacity: 0,
+      top: '-100%',
       pointerEvents: 'none',
     },
   },
