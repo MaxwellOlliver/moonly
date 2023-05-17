@@ -1,11 +1,8 @@
 import Background from './Background';
 import { Container } from './styles';
-import Player from './Panel';
-import Help from './Help';
+import SongPanel from './SongPanel';
 import { useEffect, useState } from 'react';
-import { BiHelpCircle } from 'react-icons/bi';
-import { ReactComponent as Loader } from '../../assets/loader.svg';
-import { classNames } from '../../utils/classNames';
+import Loader from './Loader';
 
 interface ReadyToPlay {
   audio: boolean;
@@ -13,7 +10,6 @@ interface ReadyToPlay {
 }
 
 export default function Lyrics(): JSX.Element {
-  const [isOpen, setIsOpen] = useState(true);
   const [readyToPlay, setReadyToPlay] = useState<ReadyToPlay>({
     audio: false,
     background: false,
@@ -37,10 +33,6 @@ export default function Lyrics(): JSX.Element {
     };
   }, [readyToPlay]);
 
-  function toggle(): void {
-    setIsOpen((state) => !state);
-  }
-
   function audioReady(): void {
     setReadyToPlay((state) => ({ ...state, audio: true }));
   }
@@ -51,21 +43,9 @@ export default function Lyrics(): JSX.Element {
 
   return (
     <Container>
-      <button className="lyrics__help-btn" onClick={toggle}>
-        <BiHelpCircle />
-        <span>ajuda</span>
-      </button>
       <Background backgroundReady={backgroundReady} />
-      <Player audioReady={audioReady} />
-      <Help toggleHelp={toggle} isOpen={isOpen} />
-      <div
-        className={classNames('lyrics__loader', {
-          '--hide': hideLoader,
-        })}
-      >
-        <Loader width={30} height={30} />
-        <span className="loader__title">moonly</span>
-      </div>
+      <SongPanel audioReady={audioReady} />
+      <Loader hideLoader={hideLoader} />
     </Container>
   );
 }

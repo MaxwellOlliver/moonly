@@ -12,7 +12,7 @@ interface IUseAudioPlayer {
   play: () => void;
   togglePlayPause: () => void;
   setVolume: (v: number) => void;
-  setCurrentTime: (t: number, add?: boolean) => void;
+  setCurrentTime: (t: number, shouldSum?: boolean) => void;
 }
 
 export default function useAudioPlayer(
@@ -77,10 +77,10 @@ export default function useAudioPlayer(
     }
   }
 
-  function setCurrentTime(time: number, add?: boolean): void {
+  function setCurrentTime(time: number, shouldSum?: boolean): void {
     if (ref.current) {
       pause();
-      if (add) {
+      if (shouldSum) {
         ref.current.currentTime = ref.current.currentTime + time;
       } else {
         ref.current.currentTime = time;

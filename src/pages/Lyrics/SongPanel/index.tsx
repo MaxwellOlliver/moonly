@@ -5,33 +5,28 @@ import {
   BsPlayCircleFill,
 } from 'react-icons/bs';
 
-import RangeInput from '../../components/RangeInput';
-import { PlayerContainer } from './styles';
-import useAudioPlayer from '../../hooks/useAudioPlayer';
-import { formatSeconds } from '../../utils/formatSeconds';
+import RangeInput from '../../../components/RangeInput';
+import { SongPanelContainer } from './styles';
+import useAudioPlayer from '../../../hooks/useAudioPlayer';
+import { formatSeconds } from '../../../utils/formatSeconds';
 
-import Sunflower from '../../assets/sunflower.mp3';
-import AlbumCover from '../../assets/sunflower-cover.jpg';
-import Check from '../../assets/check.png';
-import LyricsPanel from './LyricsPanel';
+import Check from '../../../assets/check.png';
+import Lyrics from './Lyrics';
 import { isMobile } from 'react-device-detect';
-import useShortcut from '../../hooks/useShortcut';
+import useShortcut from '../../../hooks/useShortcut';
+import { lyrics } from '../../../lyrics';
 
-interface PanelProps {
+interface SongPanelProps {
   audioReady: () => void;
 }
 
-export default function Panel({ audioReady }: PanelProps): JSX.Element {
+const sunflower = lyrics[0];
+
+export default function SongPanel({ audioReady }: SongPanelProps): JSX.Element {
   const [volumeInput, setVolumeInput] = useState(30);
   const audioRef = useRef<HTMLAudioElement>(null);
   const { data, pause, play, setVolume, setCurrentTime, togglePlayPause } =
     useAudioPlayer(audioRef);
-
-  useEffect(() => {
-    if (data.readyToPlay) {
-      audioReady();
-    }
-  }, [data.readyToPlay]);
 
   useShortcut([
     {
@@ -54,6 +49,12 @@ export default function Panel({ audioReady }: PanelProps): JSX.Element {
     },
   ]);
 
+  useEffect(() => {
+    if (data.readyToPlay) {
+      audioReady();
+    }
+  }, [data.readyToPlay]);
+
   function handleChangeVolumeInput(value: number): void {
     setVolumeInput(value);
     setVolume(value / 100);
@@ -65,27 +66,28 @@ export default function Panel({ audioReady }: PanelProps): JSX.Element {
 
   return (
     <Fragment>
-      <LyricsPanel time={data.currentTime} />
-      <PlayerContainer>
-        <div className="player__song-info">
-          <img className="song-info__album-cover" src={AlbumCover} />
+      <Lyrics time={data.currentTime} />
+      <SongPanelContainer>
+        <div className="song-panel__song-info">
+          <img className="song-info__album-cover" src={sunflower.cover} />
           <div className="song-info__box">
-            <h4>Sunflower</h4>
+            <h4>{sunflower.title}</h4>
             <div className="box__artist">
-              <span>Post Malone, Swae Lee</span>
-              <img src={Check} alt="" />
+              <span>{sunflower.singers.join(', ')}</span>
+              <img src={Check} alt="verified singers" />
             </div>
           </div>
         </div>
-        <div className="player__audio-control">
-          <audio ref={audioRef} src={Sunflower} data-a-id="audio-sn" loop />
-          <div className="player__controls">
+        <div className="song-panel__audio-control">
+          <audio ref={audioRef} src={sunflower.audioUrl} loop />
+          <div className="song-panel__controls">
             {data.isPaused ? (
               <BsPlayCircleFill
                 className="controls__play-pause"
                 color="#fff"
                 size={60}
                 onClick={play}
+                aria-label="play"
               />
             ) : (
               <BsPauseCircleFill
@@ -93,6 +95,7 @@ export default function Panel({ audioReady }: PanelProps): JSX.Element {
                 color="#fff"
                 size={60}
                 onClick={pause}
+                aria-label="pause"
               />
             )}
             {!isMobile && (
@@ -110,7 +113,7 @@ export default function Panel({ audioReady }: PanelProps): JSX.Element {
               </div>
             )}
           </div>
-          <span className="player__time">
+          <span className="song-panel__time">
             {formatSeconds(data.currentTime)}
           </span>
           <RangeInput
@@ -121,7 +124,7 @@ export default function Panel({ audioReady }: PanelProps): JSX.Element {
             step={0.1}
           />
         </div>
-      </PlayerContainer>
+      </SongPanelContainer>
     </Fragment>
   );
 }

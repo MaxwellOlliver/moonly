@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { type LyricSentence, sunflower } from '../../lyrics';
+import { type LyricSentence, lyrics } from '../../../lyrics';
 import { LyricsPanelContainer } from './styles';
 
 interface LyricsPanelProps {
@@ -9,6 +9,8 @@ interface LyricsPanelProps {
 interface LyricsWithFocus extends LyricSentence {
   focus: 'none' | 'semi' | 'total';
 }
+
+const sunflower = lyrics[0].lyrics;
 
 export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
   const lastCurrent = useRef<LyricSentence | null>(null);
