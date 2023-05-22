@@ -1,4 +1,4 @@
-import { styled } from '../../styles/stitches';
+import { styled } from '@/styles/stitches';
 
 const Container = styled('div', {
   width: '100%',
@@ -11,7 +11,7 @@ const Container = styled('div', {
   '&::after': {
     content: 'moonly',
     fontFamily: "'Dancing Script', cursive",
-    position: 'fixed',
+    position: 'absolute',
     top: '1rem',
     left: '1.5rem',
     fontSize: '1.5rem',
@@ -49,7 +49,7 @@ const BackgroundContainer = styled('div', {
   '.bg-blur': {
     height: '100%',
     width: '100%',
-    backdropFilter: 'blur(26px)',
+    backdropFilter: 'blur(5px)',
     position: 'fixed',
     top: 0,
     left: 0,
@@ -83,7 +83,7 @@ const LoaderContainer = styled('div', {
     fontSize: '2.5rem',
   },
   '&.--hide': {
-    top: '-100%',
+    top: '-100vh',
     pointerEvents: 'none',
   },
 });

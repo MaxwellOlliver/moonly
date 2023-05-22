@@ -1,8 +1,10 @@
-import Background from './Background';
-import { Container } from './styles';
-import SongPanel from './SongPanel';
 import { useEffect, useState } from 'react';
+
+import Background from './Background';
+import SongPanel from './SongPanel';
 import Loader from './Loader';
+
+import { Container } from './styles';
 
 interface ReadyToPlay {
   audio: boolean;

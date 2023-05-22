@@ -4,23 +4,23 @@ import {
   BsVolumeUp,
   BsPlayCircleFill,
 } from 'react-icons/bs';
-
-import RangeInput from '../../../components/RangeInput';
-import { SongPanelContainer } from './styles';
-import useAudioPlayer from '../../../hooks/useAudioPlayer';
-import { formatSeconds } from '../../../utils/formatSeconds';
-
-import Check from '../../../assets/check.png';
-import Lyrics from './Lyrics';
 import { isMobile } from 'react-device-detect';
-import useShortcut from '../../../hooks/useShortcut';
-import { lyrics } from '../../../lyrics';
+
+import RangeInput from '@/components/RangeInput';
+import { SongPanelContainer } from './styles';
+import useAudioPlayer from '@/hooks/useAudioPlayer';
+import { formatSeconds } from '@/utils/formatSeconds';
+
+import Check from '@/assets/check.png';
+import Lyrics from './Lyrics';
+import useShortcut from '@/hooks/useShortcut';
+import { songs } from '@/lyrics';
 
 interface SongPanelProps {
   audioReady: () => void;
 }
 
-const sunflower = lyrics[0];
+const sunflower = songs[0];
 
 export default function SongPanel({ audioReady }: SongPanelProps): JSX.Element {
   const [volumeInput, setVolumeInput] = useState(30);

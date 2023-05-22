@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { type LyricSentence, lyrics } from '../../../lyrics';
+import { type LyricSentence, songs } from '@/lyrics';
 import { LyricsPanelContainer } from './styles';
 
 interface LyricsPanelProps {
@@ -10,7 +10,7 @@ interface LyricsWithFocus extends LyricSentence {
   focus: 'none' | 'semi' | 'total';
 }
 
-const sunflower = lyrics[0].lyrics;
+const sunflower = songs[0].lyrics;
 
 export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
   const lastCurrent = useRef<LyricSentence | null>(null);
@@ -18,7 +18,7 @@ export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
 
   function getLyrics(): LyricsWithFocus[] {
     const current: LyricSentence | undefined = sunflower.find(
-      (lyric, index) => {
+      (lyric, index: number) => {
         const next = sunflower[index + 1];
 
         return lyric.time <= time && ((next && next.time > time) || !next);
@@ -55,7 +55,7 @@ export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
 
     lastCurrent.current = current ?? null;
 
-    return sunflower.map((lyric, index) => {
+    return sunflower.map((lyric) => {
       const previous = current
         ? sunflower[sunflower.indexOf(current) - 1]
         : null;

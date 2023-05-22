@@ -1,5 +1,6 @@
-import { classNames } from '../../utils/classNames';
-import { ReactComponent as LoaderSvg } from '../../assets/loader.svg';
+import { classNames } from '@/utils/classNames';
+import { ReactComponent as LoaderSvg } from '@/assets/loader.svg';
+
 import { LoaderContainer } from './styles';
 
 interface LoaderProps {

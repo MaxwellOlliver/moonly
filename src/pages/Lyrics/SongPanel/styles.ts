@@ -1,4 +1,4 @@
-import { styled } from '../../../styles/stitches';
+import { styled } from '@/styles/stitches';
 
 const SongPanelContainer = styled('div', {
   width: '100%',

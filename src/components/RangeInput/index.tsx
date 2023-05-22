@@ -1,7 +1,9 @@
 import { isMobile } from 'react-device-detect';
 import { useEffect, useRef, useState } from 'react';
+
+import { roundByStep } from '@/utils/roundByStep';
+
 import { RangeContainer, RangeSlider, RangeThumb, RangeValue } from './styles';
-import { roundByStep } from '../../utils/roundByStep';
 
 interface RangeInputProps {
   step?: number;

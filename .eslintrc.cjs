@@ -15,6 +15,7 @@ module.exports = {
     project: './tsconfig.json',
   },
   plugins: ['react', 'react-hooks', 'prettier'],
+  ignorePatterns: ['vite.config.ts'],
   rules: {
     '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
     'react/prop-types': 'off',
