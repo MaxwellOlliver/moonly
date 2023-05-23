@@ -1,7 +1,7 @@
-import SunflowerAudio from '@/assets/sunflower.mp3';
-import SunflowerCover from '@/assets/sunflower-cover.jpg';
-import SunflowerBackground from '@/assets/background-video.gif';
-import { sunflowerLyrics } from './sunflower';
+import PaperWallsAudio from '@/assets/paper-walls.mp3';
+import PaperWallsCover from '@/assets/paper-walls-cover.jpg';
+import PaperWallsBackground from '@/assets/paper-walls-background.gif';
+import { paperWallsLyrics } from './paper-walls';
 
 export interface LyricSentence {
   id: number;
@@ -22,11 +22,11 @@ export interface Song {
 export const songs: Song[] = [
   {
     id: 'song-1',
-    title: 'Sunflower',
-    cover: SunflowerCover,
-    background: SunflowerBackground,
-    audioUrl: SunflowerAudio,
-    singers: ['Post Malone', 'Swae Lee'],
-    lyrics: sunflowerLyrics,
+    title: 'Paper walls',
+    cover: PaperWallsCover,
+    background: PaperWallsBackground,
+    audioUrl: PaperWallsAudio,
+    singers: ['Elliot Kings', 'Riggs', 'Mykyl'],
+    lyrics: paperWallsLyrics,
   },
 ];

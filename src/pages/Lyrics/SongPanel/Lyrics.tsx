@@ -10,16 +10,16 @@ interface LyricsWithFocus extends LyricSentence {
   focus: 'none' | 'semi' | 'total';
 }
 
-const sunflower = songs[0].lyrics;
+const song = songs[0].lyrics;
 
 export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
   const lastCurrent = useRef<LyricSentence | null>(null);
   const scrollRef = useRef<HTMLUListElement>(null);
 
   function getLyrics(): LyricsWithFocus[] {
-    const current: LyricSentence | undefined = sunflower.find(
+    const current: LyricSentence | undefined = song.find(
       (lyric, index: number) => {
-        const next = sunflower[index + 1];
+        const next = song[index + 1];
 
         return lyric.time <= time && ((next && next.time > time) || !next);
       },
@@ -55,11 +55,9 @@ export default function LyricsPanel({ time }: LyricsPanelProps): JSX.Element {
 
     lastCurrent.current = current ?? null;
 
-    return sunflower.map((lyric) => {
-      const previous = current
-        ? sunflower[sunflower.indexOf(current) - 1]
-        : null;
-      const next = current ? sunflower[sunflower.indexOf(current) + 1] : null;
+    return song.map((lyric) => {
+      const previous = current ? song[song.indexOf(current) - 1] : null;
+      const next = current ? song[song.indexOf(current) + 1] : null;
 
       return {
         ...lyric,

@@ -20,7 +20,7 @@ interface SongPanelProps {
   audioReady: () => void;
 }
 
-const sunflower = songs[0];
+const song = songs[0];
 
 export default function SongPanel({ audioReady }: SongPanelProps): JSX.Element {
   const [volumeInput, setVolumeInput] = useState(30);
@@ -69,17 +69,17 @@ export default function SongPanel({ audioReady }: SongPanelProps): JSX.Element {
       <Lyrics time={data.currentTime} />
       <SongPanelContainer>
         <div className="song-panel__song-info">
-          <img className="song-info__album-cover" src={sunflower.cover} />
+          <img className="song-info__album-cover" src={song.cover} />
           <div className="song-info__box">
-            <h4>{sunflower.title}</h4>
+            <h4>{song.title}</h4>
             <div className="box__artist">
-              <span>{sunflower.singers.join(', ')}</span>
+              <span>{song.singers.join(', ')}</span>
               <img src={Check} alt="verified singers" />
             </div>
           </div>
         </div>
         <div className="song-panel__audio-control">
-          <audio ref={audioRef} src={sunflower.audioUrl} loop />
+          <audio ref={audioRef} src={song.audioUrl} loop />
           <div className="song-panel__controls">
             {data.isPaused ? (
               <BsPlayCircleFill
