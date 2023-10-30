@@ -3,7 +3,7 @@ import { styled } from '@/styles/stitches';
 const Container = styled('div', {
   width: '100%',
   maxWidth: '100vw',
-  height: '100vh',
+  height: '100%',
   maxHeight: '100vh',
   minHeight: '100vh',
   display: 'grid',
@@ -49,17 +49,21 @@ const BackgroundContainer = styled('div', {
   '.bg-blur': {
     height: '100%',
     width: '100%',
-    backdropFilter: 'blur(5px)',
     position: 'fixed',
     top: 0,
     left: 0,
-    background: 'linear-gradient(to top, #0B0B0Be6, #0B0B0Bb3 60%, #0B0B0Be6)',
+    background: 'linear-gradient(to bottom, #0B0B0Be6, #0B0B0Bb3, #0B0B0Be6)',
+    '.blur': {
+      height: '100%',
+      width: '100%',
+      backdropFilter: 'blur(5px)',
+    },
   },
 });
 
 const LoaderContainer = styled('div', {
   position: 'fixed',
-  top: 0,
+  bottom: 0,
   left: 0,
   background: '#000',
   width: '100vw',
@@ -73,7 +77,7 @@ const LoaderContainer = styled('div', {
   fontWeight: '300',
   opacity: 1,
   pointerEvents: 'all',
-  transition: 'top 0.6s ease-in-out',
+  transition: 'bottom 0.6s ease-in-out',
   zIndex: 999999,
   img: {
     width: '30px',
@@ -83,7 +87,7 @@ const LoaderContainer = styled('div', {
     fontSize: '2.5rem',
   },
   '&.--hide': {
-    top: '-100vh',
+    bottom: '100%',
     pointerEvents: 'none',
   },
 });

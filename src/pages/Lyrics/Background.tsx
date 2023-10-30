@@ -13,7 +13,9 @@ export default function Background({
   return (
     <BackgroundContainer>
       <img src={song.background} alt="background" onLoad={backgroundReady} />
-      <div className="bg-blur"></div>
+      <div className="bg-blur">
+        <div className="blur"></div>
+      </div>
     </BackgroundContainer>
   );
 }

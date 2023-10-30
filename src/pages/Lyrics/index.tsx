@@ -25,9 +25,7 @@ export default function Lyrics(): JSX.Element {
         (key) => !!readyToPlay[key as keyof ReadyToPlay],
       )
     ) {
-      timeout = setTimeout(() => {
-        setHideLoader(true);
-      }, 1000);
+      setHideLoader(true);
     }
 
     return () => {
@@ -45,9 +43,9 @@ export default function Lyrics(): JSX.Element {
 
   return (
     <Container>
+      <Loader hideLoader={hideLoader} />
       <Background backgroundReady={backgroundReady} />
       <SongPanel audioReady={audioReady} />
-      <Loader hideLoader={hideLoader} />
     </Container>
   );
 }
