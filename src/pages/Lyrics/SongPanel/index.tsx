@@ -2,6 +2,7 @@ import { useRef, useState, Fragment, useEffect } from 'react';
 import {
   BsPauseCircleFill,
   BsVolumeUp,
+  BsVolumeMute,
   BsPlayCircleFill,
 } from 'react-icons/bs';
 import { isMobile } from 'react-device-detect';
@@ -25,6 +26,7 @@ const song = songs[0];
 export default function SongPanel({ audioReady }: SongPanelProps): JSX.Element {
   const [volumeInput, setVolumeInput] = useState(30);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const volumeCache = useRef(volumeInput);
   const { data, pause, play, setVolume, setCurrentTime, togglePlayPause } =
     useAudioPlayer(audioRef);
 
@@ -64,6 +66,15 @@ export default function SongPanel({ audioReady }: SongPanelProps): JSX.Element {
     setCurrentTime((data.duration * value) / 100);
   }
 
+  function toggleVolume(): void {
+    if (volumeInput === 0) {
+      handleChangeVolumeInput(volumeCache.current);
+    } else {
+      volumeCache.current = volumeInput;
+      handleChangeVolumeInput(0);
+    }
+  }
+
   return (
     <Fragment>
       <Lyrics time={data.currentTime} />
@@ -100,7 +111,24 @@ export default function SongPanel({ audioReady }: SongPanelProps): JSX.Element {
             )}
             {!isMobile && (
               <div className="controls__volume">
-                <BsVolumeUp color="#fff" size={35} />
+                {volumeInput === 0 ? (
+                  <BsVolumeMute
+                    color="#fff"
+                    size={30}
+                    onClick={() => {
+                      toggleVolume();
+                    }}
+                  />
+                ) : (
+                  <BsVolumeUp
+                    color="#fff"
+                    size={30}
+                    onClick={() => {
+                      toggleVolume();
+                    }}
+                  />
+                )}
+
                 <div className="volume__range-wrapper">
                   <div className="range-wrapper__input">
                     <RangeInput

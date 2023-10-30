@@ -120,11 +120,11 @@ const SongPanelContainer = styled('div', {
       },
       '@bp3': {
         marginBottom: '1rem',
-        gap: '2rem',
+        gap: '1.5rem',
       },
       '@bp4': {
         marginBottom: '1.5rem',
-        gap: '2rem',
+        gap: '1.5rem',
       },
       '.controls__play-pause': {
         cursor: 'pointer',
